@@ -1,0 +1,33 @@
+{
+  "name": "nodeBundle",
+  "version": "0.0.0",
+  "description": "A node.js library for building modular applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Errro: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/szhurin/nodeBundle.git"
+  },
+  "keywords": [
+    "bundle",
+    "DI",
+    "Dependency",
+    "injection",
+    "module"
+  ],
+  "author": "Sergey Zhurin <sjourin@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szhurin/nodeBundle/issues"
+  },
+  "dependencies": {
+    "broadway": "x",
+    "lodash":"x",
+    "simplematrix":"x"
+  },
+  "devDependencies": {
+    "chai":"x"
+  }
+}
