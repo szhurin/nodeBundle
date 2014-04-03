@@ -23,10 +23,11 @@ module.exports.attach = function (options) {
         attach: function (dirs , ext) {  
 
             //console.log(dirs);
+            var fileList = [];
             for(i in dirs){
-                serviceMaster.getFileList(di_cont, options, dirs[i], ext);
+                fileList = fileList.concat(serviceMaster.getFileList(di_cont, options, dirs[i], ext));
             }
-            service = serviceMaster.populateServiceList(di_cont, options, service);     
+            service = serviceMaster.populateServiceList(di_cont, options, service, fileList );     
         },
         // ----------------------------------
         init : function(bExitOnError){
