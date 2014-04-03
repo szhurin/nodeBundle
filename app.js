@@ -1,11 +1,9 @@
 var nb = require('./index');
 
-nb.attach(['bundles', 'bundles1'],  __dirname+'/');
+nb.attach(['bundles', 'bundles1']);
 
 var di = nb.DI;
 
-console.log('good');
-
-di.hellou(' world');
+di.hello(' world');
 di.hellour(' world');
 di.hellor(' world');

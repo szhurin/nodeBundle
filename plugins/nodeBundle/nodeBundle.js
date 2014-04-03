@@ -22,7 +22,7 @@ module.exports.name = "__nodeBundle_main";
 module.exports.attach = function (options) {
     bundleDirs = options.bundleDirs;
     root = options.root;
-    moduleRoot = options.moduleRoot || root;
+    pluginRoot = options.pluginRoot || root;
     
     //console.log(options);
     //string
@@ -39,7 +39,7 @@ module.exports.attach = function (options) {
     }
     // ---------------------
     pluginDir = options.pluginDir || 'plugins';
-    pluginDir = pathNameFix(pluginDir, moduleRoot);
+    pluginDir = pathNameFix(pluginDir, pluginRoot);
 };
 module.exports.init = function (done) {
         
