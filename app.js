@@ -1,9 +1,8 @@
-var nb = require('./plugins/nodeBundle');
+var nb = require('./index');
 
-nb.attach({bundleDirs : ['bundles'], pluginDir: 'plugins', root: __dirname+'/'});
-nb.init();
+nb.attach(['bundles'],  __dirname+'/');
 
-var di = nb.getDI();
+var di = nb.DI;
 
 console.log('good');
 

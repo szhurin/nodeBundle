@@ -4,6 +4,7 @@ var path = require('path');
 var app = new broadway.App();
 
 var root;
+var moduleRoot;
 
 var bundleDirs;   
 var plugins;
@@ -21,6 +22,7 @@ module.exports.name = "__nodeBundle_main";
 module.exports.attach = function (options) {
     bundleDirs = options.bundleDirs;
     root = options.root;
+    moduleRoot = options.moduleRoot || root;
     
     //console.log(options);
     //string
@@ -36,8 +38,8 @@ module.exports.attach = function (options) {
         }
     }
     // ---------------------
-    pluginDir = options.pluginDir;
-    pluginDir = pathNameFix(pluginDir, root);
+    pluginDir = options.pluginDir || 'plugins';
+    pluginDir = pathNameFix(pluginDir, moduleRoot);
 };
 module.exports.init = function (done) {
         
