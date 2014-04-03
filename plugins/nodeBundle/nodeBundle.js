@@ -1,7 +1,7 @@
 var broadway = require("broadway");
 var path = require('path');
 
-var app = new broadway.App();
+var di_cont = new broadway.App();
 
 var root;
 var moduleRoot;
@@ -18,7 +18,7 @@ var pathNameFix = function(bundleName, rootDir){
 
 module.exports.name = "__nodeBundle_main";
 
-// `exports.attach` gets called by broadway on `app.use`
+// `exports.attach` gets called by broadway on `di_cont.use`
 module.exports.attach = function (options) {
     bundleDirs = options.bundleDirs;
     root = options.root;
@@ -43,11 +43,11 @@ module.exports.attach = function (options) {
 };
 module.exports.init = function (done) {
         
-    app.use( require("./bundleMaster"), {init: true, root: root , pluginsPath: pluginDir} );
+    di_cont.use( require("./bundleMaster"), {init: true, root: root , pluginsPath: pluginDir} );
     
-    var attach = app.__nbundles.attach(bundleDirs);
+    var attach = di_cont.__nbundles.attach(bundleDirs);
     
-    var init = app.__nbundles.init();
+    var init = di_cont.__nbundles.init();
     
     if(typeof(done) === 'function'){
         return done();
@@ -57,5 +57,5 @@ module.exports.init = function (done) {
 };
 
 module.exports.getDI = function(){
-    return app;
+    return di_cont;
 };
