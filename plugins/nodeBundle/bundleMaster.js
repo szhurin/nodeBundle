@@ -6,7 +6,7 @@ var service = {
     rewrites: [],
     reg : [],
     names: {},
-    deps : { importList: {},  imports:[], exportList: {},  exports:[] }
+    deps : { importList: [],  imports:[], exportList: [],  exports:[] }
 };
 
  var serviceMaster = require('./serviceMaster.js');
@@ -21,10 +21,11 @@ module.exports.attach = function (options) {
     
     di_cont.__nbundles = {
         attach: function (dirs , ext) {  
-
+                        
             //console.log(dirs);
             var fileList = [];
             for(i in dirs){
+                //console.log(['dir '+i, dirs[i]]);
                 fileList = fileList.concat(serviceMaster.getFileList(di_cont, options, dirs[i], ext));
             }
             service = serviceMaster.populateServiceList(di_cont, options, service, fileList );     
@@ -49,6 +50,9 @@ module.exports.attach = function (options) {
         },
 
         getPluginList: function(){
+            
+            
+            
             return service;
         },
 

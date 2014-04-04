@@ -111,6 +111,10 @@ module.exports.calcMatrix = function(services){
 module.exports.calculateCyclic = function(services){
     var matArr = calcMatrix(services);
     
+    if(!_.isArray(matArr) || matArr.length === 0){
+       return []; 
+    }
+    
     var A = new SM.Matrix(matArr);
     var B = A;
     var count = 0;

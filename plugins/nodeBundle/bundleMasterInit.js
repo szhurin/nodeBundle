@@ -32,9 +32,17 @@ module.exports = {
 
         if(dependCycle !== false){
             
-            returnVal = {   err: 'Detected CYCLIC dependancies. Services in cycle:',
+            if(dependCycle.length === 0 ){
+                returnVal = {   err: 'No dependancies are registered:',
                             errorData: dependCycle
                         };
+            }else{
+                returnVal = {   err: 'Detected CYCLIC dependancies. Services in cycle:',
+                            errorData: dependCycle
+                        };
+            }
+            
+            
             
             if(bExitOnError){
                 errorHandle.errorOnInit(returnVal);

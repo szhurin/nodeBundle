@@ -9,11 +9,24 @@ var getDoubleExt = function(fname){
 
 var bundleFileList;
 var nbPath;
-var dbExt; 
+var nbExt; 
+var root;
+
+function getModuleName(name){
+    var tmp = name.replace(root, '');        
+    return tmp.replace(nbExt, '');
+}
+
+function initPrivates(rootPath, ext){
+    nbExt = ext || [".nb.js"];  
+    root = rootPath;      
+};
 
 //   ----------  EXPORTS  --------------
 
 module.exports = {
+    
+    getModuleName: getModuleName,
     
     getPluginsSettings: function(service, id){
         var reg = service.reg;
@@ -34,24 +47,27 @@ module.exports = {
     
     getFileList:    function(di_cont, options, dir, ext){
         
-        var pluginMasterPath = (options.pluginsPath || "../") + "pluginMaster";
-    
-        //console.log(dir);
-    
-        di_cont.use(require(pluginMasterPath), {init: true} );
+        initPrivates(options.root, ext);
+         
+        if(di_cont.__plugins === undefined){ // no need to import plugin more than once
+            di_cont.use(require("../pluginMaster"), {init: true} );
+        }
         
-        var path = dir || options.root+"routes";
-        nbExt = ext || [".nb.js"];  
+        if(dir === undefined) {return [];}
         
-        //bundleFiles are collected together by fileService Plugin (getFiles) -> bundleFileList
+        var path = dir;       
+        //bundleFiles are included by directory passed through dir 
         bundleFileList = di_cont.__plugins.getFiles(path, nbExt, getDoubleExt);
                
         return bundleFileList; 
     },
     
+    // go through all bundles & reginter them & there services
+    // caveats move USE into bundleMaster.init - manage only module registration here 
     populateServiceList: function(di_cont, options, service,  bundle_file_list){
         bundle_file_list = bundle_file_list || bundleFileList;
-                      
+        
+        
         for(i in bundle_file_list){
             if (!bundle_file_list.hasOwnProperty(i)) continue;
             var inc = bundle_file_list[i];
@@ -61,9 +77,8 @@ module.exports = {
             var obj = require(inc);
 
             
-            if(!obj.name){
-                var tmp = inc.replace(options.root+'/', '');        
-                obj.name = tmp.replace(nbExt, '');
+            if(!obj.name){                        
+                obj.name = getModuleName(inc);
             }
             
             var services = obj.__settings.__services;
