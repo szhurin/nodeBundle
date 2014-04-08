@@ -20,15 +20,15 @@ module.exports.attach = function (options) {
     var di_cont = this; 
     
     di_cont.__nbundles = {
-        attach: function (dirs , ext) {  
+        attach: function (dirs , ext, globalOptions) {  
                         
             //console.log(dirs);
             var fileList = [];
             for(i in dirs){
                 //console.log(['dir '+i, dirs[i]]);
-                fileList = fileList.concat(serviceMaster.getFileList(di_cont, options, dirs[i], ext));
+                fileList = fileList.concat(serviceMaster.getFileList(di_cont, globalOptions, dirs[i], ext));
             }
-            service = serviceMaster.populateServiceList(di_cont, options, service, fileList );     
+            service = serviceMaster.populateServiceList(di_cont, globalOptions, service, fileList );     
         },
         // ----------------------------------
         init : function(bExitOnError){

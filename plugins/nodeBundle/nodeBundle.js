@@ -9,6 +9,8 @@ var moduleRoot;
 var bundleDirs;
 var plugins;
 
+var globalOptions;
+
 //var bundleMaster = require('./bundleMaster');
 
 var fixEndingSlash = function(path){if(path[path.length -1] !== '/'){ path +='/'; } return path;};
@@ -17,6 +19,7 @@ module.exports.name = "__nodeBundle_main";
 
 // `exports.attach` gets called by broadway on `di_cont.use`
 module.exports.attach = function (options) {
+    globalOptions = options;
     bundleDirs = options.bundleDirs;
     root = fixEndingSlash(options.root);
     pluginRoot = options.pluginRoot || root;
@@ -41,8 +44,9 @@ module.exports.attach = function (options) {
     }
 };
 module.exports.init = function (done) {
+    
     di_cont.use( require("./bundleMaster"), {init: true, root: root , pluginsPath: pluginDir} );
-    var attach = di_cont.__nbundles.attach(bundleDirs);
+    var attach = di_cont.__nbundles.attach(bundleDirs, [".nb.js"], globalOptions);
     var init = di_cont.__nbundles.init();
     if(typeof(done) === 'function'){ return done(); }
     else{ return; }
