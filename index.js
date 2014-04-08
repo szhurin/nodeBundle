@@ -1,9 +1,16 @@
 var nb = require('./plugins/nodeBundle');
 
 
-var attach = function(bundleDirs , root){
+var attach = function(bundleDirs , options, root){
     root = root || require('path').dirname(require.main.filename) +'/';
-    nb.attach({bundleDirs : bundleDirs, pluginDir: 'plugins', root: root, pluginRoot: __dirname+'/'});
+    
+    options = options || {};
+    options['bundleDirs'] = bundleDirs;
+    options['pluginDir'] = 'plugins';
+    options['root'] = root;
+    options['pluginRoot'] = __dirname+'/';
+    
+    nb.attach(options);
     nb.init();
 };
 

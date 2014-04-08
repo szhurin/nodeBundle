@@ -132,7 +132,7 @@ module.exports = {
                 }
             }
             
-            di_cont.use(obj, {} );            
+            di_cont.use(obj, options );            
         }
                  
         return service;
