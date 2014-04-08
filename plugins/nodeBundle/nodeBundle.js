@@ -57,6 +57,7 @@ module.exports.getDI = function(){
 };
 
 module.exports.basicBundleBuilder = builder;
+module.exports.basic = builder;
 
 function builder(){
     var basicBuilder = require('./basicBundleBuilder');

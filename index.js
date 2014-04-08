@@ -22,3 +22,4 @@ module.exports.getDI = getDI;
 module.exports.DI = getDI();
 
 module.exports.basicBundleBuilder = nb.basicBundleBuilder;
+module.exports.basic = nb.basic;
