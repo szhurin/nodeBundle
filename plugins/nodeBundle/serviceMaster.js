@@ -79,6 +79,8 @@ module.exports = {
             
             if(!obj.name){                        
                 obj.name = getModuleName(inc);
+            }else{
+                obj.name = ''+obj.name;
             }
             
             var services = obj.__settings.__services;
@@ -97,6 +99,10 @@ module.exports = {
             service.deps.exportList[index] = exp;
             service.deps.exports = _.union(exp, service.deps.exports);
             
+            
+            if(service.names[obj.name] !== undefined){
+                errorHandle.errorOnBundleOverride(obj.name, service, obj);
+            }
             service.names[obj.name] = index;
             
             // create list of all    

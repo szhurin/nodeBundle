@@ -5,7 +5,7 @@ nb.attach(['bundles', 'bundles1']);
 var di = nb.DI;
 
 //console.log('-----------------------------');
-//console.log((di.__nbundles.getPluginList()).names);
+console.log((di.__nbundles.getPluginList()).names);
 //console.log((di.__nbundles.getPluginList()).exp_list);
 //console.log((di.__nbundles.getPluginList()).imp_list);
 //console.log((di.__nbundles.getPluginList()).deps);

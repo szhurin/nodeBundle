@@ -1,22 +1,11 @@
-//route test , test_route
-
+//basic module structure
 module.exports = function(){
     return{
         name: '__basic',
 
-        attach : function (options) {
-            //console.log('attach hellou');
-            var di_cont = this;        
-        },
-
+        attach : function (options) {},
         detach : function (options) {},
-
-        init : function (done) {
-
-            //console.log('init index hellou');
-            // This plugin doesn't require any initialization step.
-            return done();
-        },
+        init : function (done) { return done(); },
 
         __settings: {
             __bundle_file: '',    

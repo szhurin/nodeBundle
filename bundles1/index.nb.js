@@ -16,7 +16,7 @@ function attach (options) {
     };
     
 function init () {
-        //console.log('init bundles1/index');
+        console.log('init bundles1/index');
        
     };
 

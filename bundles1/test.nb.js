@@ -10,10 +10,14 @@ function attach(options) {
           console.log("Hello "+ world + tmp);
         };
     };
+    
+function init(){console.log('init bundle1/test ')};
 
-var basic = builder.init();
+var basic = builder.init('test');
 
-basic.set('attach', attach).addExports(['hellor']);;
+basic   .set('attach', attach)
+        .set('init', init)
+        .addExports(['hellor']);
 
 module.exports = basic.getBundle();
 

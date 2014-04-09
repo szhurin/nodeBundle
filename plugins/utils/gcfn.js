@@ -8,7 +8,8 @@ function gcfn() {
 
 function _getCallerFile() {
     try {
-        var err = new Error(),callerfile,currentfile;       
+        var err = new Error(), callerfile, currentfile, oldPrepareStackTrace;
+        oldPrepareStackTrace = Error.prepareStackTrace;
         Error.prepareStackTrace = function (err, stack) {return stack;};
         currentfile=err.stack.shift().getFileName();
         var fl = 0;
@@ -19,10 +20,12 @@ function _getCallerFile() {
                     fl++;
                     currentfile = callerfile;
                 }else{
+                    Error.prepareStackTrace = oldPrepareStackTrace ;
                     return callerfile;
                 }
             }
         }
     } catch (err) {}
+    Error.prepareStackTrace = oldPrepareStackTrace ;
     return undefined;
 }

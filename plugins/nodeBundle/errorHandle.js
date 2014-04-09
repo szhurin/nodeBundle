@@ -51,5 +51,11 @@ module.exports = {
         returnVal.err = 'unmet dependancies are: '+diff.join(',') + '\r\n in files: \r\n'+error_str;
         returnVal.errorData = err_bundles;
         return returnVal;
+    },
+    
+    errorOnBundleOverride: function(name, service, obj){
+        var old_fname = service.reg[service.names[name]].__settings.__bundle_file;
+        var new_fname = obj.__settings.__bundle_file; 
+        console.error('!!!!! Overriding module '+name+' in file '+old_fname+' to new file '+ new_fname);
     }
 };
