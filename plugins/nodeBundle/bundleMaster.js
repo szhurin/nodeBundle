@@ -17,18 +17,18 @@ module.exports.name = "plugins/bundleMaster";
 
 // `exports.attach` gets called by broadway on `app.use`
 module.exports.attach = function (options) {
-    var di_cont = this; 
-    
+    var di_cont = this;
+
     di_cont.__nbundles = {
-        attach: function (dirs , ext, globalOptions) {  
-                        
+        attach: function (dirs , ext, globalOptions) {
+
             //console.log(dirs);
             var fileList = [];
             for(i in dirs){
                 //console.log(['dir '+i, dirs[i]]);
                 fileList = fileList.concat(serviceMaster.getFileList(di_cont, globalOptions, dirs[i], ext));
             }
-            service = serviceMaster.populateServiceList(di_cont, globalOptions, service, fileList );     
+            service = serviceMaster.populateServiceList(di_cont, globalOptions, service, fileList );
         },
         // ----------------------------------
         init : function(bExitOnError){
@@ -36,8 +36,8 @@ module.exports.attach = function (options) {
             bExitOnError = bExitOnError || true;
             var returnVal = {err: false};
             var bundleMasterInit = require('./bundleMasterInit.js');
-            
-            returnVal = bundleMasterInit.checkImortExport(service, bExitOnError);
+
+            returnVal = bundleMasterInit.checkImportExport(service, bExitOnError);
 
             returnVal = bundleMasterInit.checkCyclics(service, bExitOnError);
 
@@ -50,32 +50,32 @@ module.exports.attach = function (options) {
         },
 
         getPluginList: function(){
-            
-            
-            
+
+
+
             return service;
         },
 
         getPluginsSettings: function(id){
             return serviceMaster.getPluginsSettings(service, id);
         },
-        
+
         getBundlesSettings: function(id){
-            
+
             var settingsList = serviceMaster.getPluginsSettings(service, id);
             if(id !== undefined) { return settingsList;}
-            
+
             var nbList = [];
-            
+
             for(i in settingsList){
                 if (!settingsList.hasOwnProperty(i)) continue;
                 var set = settingsList[i];
-                
+
                 if(set['__nb'] !== undefined ){
                     nbList.push(set['__nb']);
                 }
             }
-            
+
             return nbList;
         }
     };

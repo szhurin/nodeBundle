@@ -1,6 +1,7 @@
 var nb = require('./index');
 console.log('____________________________________________');
 nb.attach(['bundles', 'bundles1']);
+//nb.attach(['bundles1']);
 
 var di = nb.DI;
 
