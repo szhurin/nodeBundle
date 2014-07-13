@@ -1,5 +1,5 @@
 var broadway = require("broadway");
-var path = require('path');
+//var path = require('path');
 
 var di_cont = new broadway.App();
 
@@ -17,22 +17,25 @@ var fixEndingSlash = function(path){if(path[path.length -1] !== '/'){ path +='/'
 
 module.exports.name = "__nodeBundle_main";
 
-// `exports.attach` gets called by broadway on `di_cont.use`
+// init the bundle dirs
 module.exports.attach = function (options) {
-    globalOptions = options;
+    // init 
+	globalOptions = options;
     bundleDirs = options.bundleDirs;
     root = fixEndingSlash(options.root);
     pluginRoot = options.pluginRoot || root;
     pluginRoot =  fixEndingSlash(pluginRoot);
-    // ---------------------
     pluginDir = options.pluginDir || 'plugins';
     pluginDir = fixEndingSlash(pluginRoot + pluginDir);
+    // ---------------------
+    
+    
     var sMaster = require(pluginDir+'pluginMaster/fileMaster.js');
     // --------------------
     //console.log(options);
-    //string
+    //Add the root dir to the bundle dir names
     if(typeof(bundleDirs) === 'string'){
-        bundles = [ sMaster.pathNameFix(bundleDirs, root) ];
+        bundleDirs = [ sMaster.pathNameFix(bundleDirs, root) ];
     }else{   // aray of strings ??? .....
         for(i in bundleDirs){
             var bundleName = bundleDirs[i];
@@ -43,6 +46,8 @@ module.exports.attach = function (options) {
         }
     }
 };
+
+
 module.exports.init = function (done) {
     
     di_cont.use( require("./bundleMaster"), {init: true, root: root , pluginsPath: pluginDir} );
@@ -63,3 +68,6 @@ function builder(){
     var basicBuilder = require('./basicBundleBuilder');
     return basicBuilder;
 };
+
+
+

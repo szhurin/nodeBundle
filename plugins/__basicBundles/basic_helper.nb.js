@@ -15,7 +15,6 @@ module.exports = {
     name: module_name,
     
     attach : function (options) {
-        //console.log('attach hellou');
         var di_cont = this;
         
     },
