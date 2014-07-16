@@ -8,7 +8,7 @@ var test;
 function attach (options) {
         //console.log('attach hellou');
         var di_cont = this;
-        this.hellour = function (world) {
+        this.h1 = function (world) {
             var tmp = options.delimiter || ".";
             di_cont.hello(' test');
           console.log("Hellou "+ world + tmp);
@@ -25,7 +25,7 @@ var basic = builder.init();
 basic
         .set('attach', attach)
         .set('init', init)
-        .addExports(['hellour','test'])
+        .addExports(['h1','test'])
         .addImports(['hello']);;
 
 module.exports = basic.getBundle();

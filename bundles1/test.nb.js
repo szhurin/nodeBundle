@@ -5,7 +5,7 @@ var builder = require(root+'/index').basicBundleBuilder();
 
 function attach(options) {
     //console.log('attach hellou');
-    this.hellor = function (world) {
+    this.h_test = function (world) {
         var tmp = options.delimiter || ".";
       console.log("Hello "+ world + tmp);
     };
@@ -17,6 +17,6 @@ var basic = builder.init('test');
 
 basic   .set('attach', attach)
         .set('init', init)
-        .addExports(['hellor']);
+        .addExports(['h_test']);
 
 module.exports = basic.getBundle();

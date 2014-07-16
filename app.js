@@ -7,9 +7,9 @@ var di = nb.DI;
 
 //console.log('-----------------------------');
 console.log((di.__nbundles.getPluginList()).names);
-//console.log((di.__nbundles.getPluginList()).exp_list);
-//console.log((di.__nbundles.getPluginList()).imp_list);
-//console.log((di.__nbundles.getPluginList()).deps);
+console.log((di.__nbundles.getPluginList()).exp_list);
+console.log((di.__nbundles.getPluginList()).imp_list);
+console.log((di.__nbundles.getPluginList()).deps);
 
 
 di.hello(' world');

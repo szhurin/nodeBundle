@@ -32,7 +32,7 @@ module.exports = {
 
         //console.error(service);
 
-        for(i in diff){
+        for(var i in diff){
             if (!diff.hasOwnProperty(i)) continue;
             var service_name = diff[i];
 

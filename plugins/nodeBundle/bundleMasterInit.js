@@ -1,5 +1,5 @@
 var _ = require("lodash");
-var errorHandle = require('./errorHandle.js');
+var errorHandle = require('../errorMaster');
 
 var returnVal = {err: false};
 

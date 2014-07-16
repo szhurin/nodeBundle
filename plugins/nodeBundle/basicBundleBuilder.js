@@ -10,7 +10,7 @@ function init(modName){
     var fName = getCallFileName();
     var basic = require('../__basicBundles/basic.nb.js');
     basicBundle = basic();
-    basicBundle.__settings.__bundle_file = fName;    
+    basicBundle.__settings.__bundle_file = fName;
     basicBundle.name = modName || serviceMaster.getModuleName(fName);
     return module.exports;
 }

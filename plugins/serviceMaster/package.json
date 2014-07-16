@@ -1,0 +1,5 @@
+{
+    "name": "serviceMaster",
+    "main": "serviceMaster",
+    "description": "works with services & manages the service list"
+}

@@ -42,7 +42,7 @@ module.exports.attach = function (options) {
             returnVal = bundleMasterInit.checkCyclics(service, bExitOnError);
 
             di_cont.init(function (err) {
-                var errorHandle = require('./errorHandle.js');
+                var errorHandle = require('../errorMaster');
                 errorHandle.errorOnDiInit(err);
             });
 

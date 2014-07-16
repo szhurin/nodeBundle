@@ -8,15 +8,15 @@ module.exports = function(){
         init : function (done) { return done(); },
 
         __settings: {
-            __bundle_file: '',    
+            __bundle_file: '',
             __services : {
                 __rewrite: false,
                 imports: [],
                 exports: []
-            },    
+            },
             __nb:{
                 __routes : {}
-            }   
+            }
         }
     };
 };

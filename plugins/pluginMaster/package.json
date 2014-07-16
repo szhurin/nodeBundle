@@ -1,4 +1,5 @@
 {
     "name": "pluginMaster",
-    "main": "pluginMaster"
+    "main": "pluginMaster",
+    "description" : "module to use FS operations with"
 }
