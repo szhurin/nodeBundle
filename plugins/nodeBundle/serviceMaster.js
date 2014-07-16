@@ -68,7 +68,7 @@ module.exports = {
         bundle_file_list = bundle_file_list || bundleFileList;
 
 
-        for(i in bundle_file_list){
+        for(var i in bundle_file_list){
             if (!bundle_file_list.hasOwnProperty(i)) continue;
             var inc = bundle_file_list[i];
 
@@ -106,7 +106,7 @@ module.exports = {
             service.names[obj.name] = index;
 
             // create list of all
-            for(j in exp){
+            for(var j in exp){
                 if (!exp.hasOwnProperty(j) || exp[j] === '') continue;
                 var service_name = exp[j];
 
@@ -128,7 +128,7 @@ module.exports = {
                 service.exp_list[service_name] = index;
             }
 
-            for(j in imp){
+            for(var j in imp){
                 if (!imp.hasOwnProperty(j) || imp[j] === '') continue;
                 var service_name = imp[j];
                 if(service.imp_list[service_name] !== undefined){
