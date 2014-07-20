@@ -2,7 +2,7 @@ var _ = require('lodash');
 
 
 var getCallFileName = require('../utils/gcfn');
-var serviceMaster = require('./serviceMaster');
+var serviceMaster = require('../serviceMaster');
 
 var basicBundle;
 

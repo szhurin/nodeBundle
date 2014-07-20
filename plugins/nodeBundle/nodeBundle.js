@@ -21,7 +21,7 @@ module.exports.name = "__nodeBundle_main";
 module.exports.attach = function (options) {
     // init 
 	globalOptions = options;
-    bundleDirs = options.bundleDirs;
+    bundleDirs = options.bundleDirs || [];
     root = fixEndingSlash(options.root);
     pluginRoot = options.pluginRoot || root;
     pluginRoot =  fixEndingSlash(pluginRoot);

@@ -9,7 +9,7 @@ var service = {
     deps : { importList: [],  imports:[], exportList: [],  exports:[] }
 };
 
- var serviceMaster = require('./serviceMaster.js');
+ var serviceMaster = require('../serviceMaster');
 
 // ----------------------------------  EXPORTS  --------------------------------
 

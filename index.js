@@ -1,6 +1,12 @@
 var nb = require('./plugins/nodeBundle');
 
-
+/**
+*   initialize the bundle component 
+*   
+*   @param array bundleDirs - an Array of dir names to register
+*   @param array options - an array of options to pass to plugins
+*   @params string root - the dir for the root of the node start file
+*/
 var attach = function(bundleDirs , options, root){
 	// get root path of called file if not given as parameter 
     root = root || require('path').dirname(require.main.filename) +'/';
