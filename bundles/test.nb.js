@@ -5,7 +5,7 @@ var settings = {
     __bundle_file: __filename,
     __services : {
         __rewrite: true,
-        imports: ['h_test'],//,'test'],
+        imports: ['h_index'],//,'test'],
         exports: ['hello']
     },
     __nb:{}

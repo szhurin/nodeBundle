@@ -20,17 +20,20 @@ module.exports.attach = function (options) {
     var di_cont = this;
 
     di_cont.__nbundles = {
+
+        //called to attach all the bundles to service registry
         attach: function (dirs , ext, globalOptions) {
 
             //console.log(dirs);
             var fileList = [];
-            for(i in dirs){
+            for(var i in dirs){
                 //console.log(['dir '+i, dirs[i]]);
                 fileList = fileList.concat(serviceMaster.getFileList(di_cont, globalOptions, dirs[i], ext));
             }
             service = serviceMaster.populateServiceList(di_cont, globalOptions, service, fileList );
         },
         // ----------------------------------
+        //called to init all the bundles to service registry
         init : function(bExitOnError){
 
             bExitOnError = bExitOnError || true;

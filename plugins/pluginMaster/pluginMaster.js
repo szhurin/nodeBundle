@@ -7,8 +7,8 @@ exports.attach = function (options) {
     var getExt = options.getExt || undefined;
     this.__plugins = {};
     this.__plugins.getFiles = function (dir , extensions, getExt) {
-        return fileMaster.getFiles(dir, extensions, getExt);  
-       
+        return fileMaster.getFiles(dir, extensions, getExt);
+
     };
 };
 
