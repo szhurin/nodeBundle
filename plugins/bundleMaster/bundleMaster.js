@@ -1,6 +1,6 @@
-// plugins registers di.__nbundles. services
+// plugins registers di.__nb. services
 
-var service = {
+var serviceReg = {
     exp_list : {},
     imp_list : {},
     rewrites: [],
@@ -19,7 +19,7 @@ module.exports.name = "plugins/bundleMaster";
 module.exports.attach = function (options) {
     var di_cont = this;
 
-    di_cont.__nbundles = {
+    di_cont.___nb = {
 
         //called to attach all the bundles to service registry
         attach: function (dirs , ext, globalOptions) {
@@ -30,7 +30,7 @@ module.exports.attach = function (options) {
                 //console.log(['dir '+i, dirs[i]]);
                 fileList = fileList.concat(serviceMaster.getFileList(di_cont, globalOptions, dirs[i], ext));
             }
-            service = serviceMaster.populateServiceList(di_cont, globalOptions, service, fileList );
+            serviceReg = serviceMaster.populateServiceReg(di_cont, globalOptions, serviceReg, fileList );
         },
         // ----------------------------------
         //called to init all the bundles to service registry
@@ -40,9 +40,9 @@ module.exports.attach = function (options) {
             var returnVal = {err: false};
             var bundleMasterInit = require('./bundleMasterInit.js');
 
-            returnVal = bundleMasterInit.checkImportExport(service, bExitOnError);
+            returnVal = bundleMasterInit.checkImportExport(serviceReg, bExitOnError);
 
-            returnVal = bundleMasterInit.checkCyclics(service, bExitOnError);
+            returnVal = bundleMasterInit.checkCyclics(serviceReg, bExitOnError);
 
             di_cont.init(function (err) {
                 var errorHandle = require('../errorMaster');
@@ -53,19 +53,17 @@ module.exports.attach = function (options) {
         },
 
         getPluginList: function(){
-
-
-
-            return service;
+            
+            return serviceReg;
         },
 
         getPluginsSettings: function(id){
-            return serviceMaster.getPluginsSettings(service, id);
+            return serviceMaster.getPluginsSettings(serviceReg, id);
         },
 
         getBundlesSettings: function(id){
 
-            var settingsList = serviceMaster.getPluginsSettings(service, id);
+            var settingsList = serviceMaster.getPluginsSettings(serviceReg, id);
             if(id !== undefined) { return settingsList;}
 
             var nbList = [];

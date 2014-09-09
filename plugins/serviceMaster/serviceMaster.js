@@ -78,7 +78,7 @@ function getPluginsSettings(services, id){
 
 
 
-function populateServiceList(di_cont, options, service,  bundle_file_list){
+function populateServiceReg(di_cont, options, service,  bundle_file_list){
     bundle_file_list = bundle_file_list || bundleFileList;
 
 
@@ -173,5 +173,5 @@ module.exports = {
 
     // go through all bundles & reginter them & there services
     // caveats move USE into bundleMaster.init - manage only module registration here
-    populateServiceList: populateServiceList
+    populateServiceReg: populateServiceReg
 };

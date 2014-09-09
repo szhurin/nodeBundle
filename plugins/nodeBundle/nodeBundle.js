@@ -13,33 +13,53 @@ var globalOptions;
 
 //var bundleMaster = require('./bundleMaster');
 
-var fixEndingSlash = function(path){if(path[path.length -1] !== '/'){ path +='/'; } return path;};
+var fixEndingSlash = function(path) {
+    if (path[path.length - 1] !== '/') {
+        path += '/';
+    }
+    return path;
+};
 
 module.exports.name = "__nodeBundle_main";
 
 // init the bundle dirs - just collect all fixed dirs gotten in options
-module.exports.attach = function (options) {
+
+/*
+ *   attaches the modules to di container
+ *   
+ *   @param object options - the name of the directory
+ *       {
+ *       bundleDirs : 'an array of directories to check for bundles',
+ *       root       : 'the roor directory of the nodeBundle module - the directory of index.js'
+ *       pluginRoot : root of pluging dirs
+ *       pluginDir  : the dir where plugins are
+ *       }
+ */
+module.exports.attach = function(options) {
     // init
-	globalOptions = options;
+    globalOptions = options;
     bundleDirs = options.bundleDirs || [];
     root = fixEndingSlash(options.root);
     pluginRoot = options.pluginRoot || root;
-    pluginRoot =  fixEndingSlash(pluginRoot);
+    pluginRoot = fixEndingSlash(pluginRoot);
     pluginDir = options.pluginDir || 'plugins';
     pluginDir = fixEndingSlash(pluginRoot + pluginDir);
     // ---------------------
 
 
-    var sMaster = require( pluginDir+'pluginMaster/fileMaster.js' );
+    var sMaster = require(pluginDir + 'pluginMaster/fileMaster.js');
     // --------------------
     //console.log(options);
-    //Add the root dir to the bundle dir names
-    if(typeof(bundleDirs) === 'string'){
-        bundleDirs = [ sMaster.pathNameFix(bundleDirs, root) ];
-    }else{   // aray of strings ??? .....
-        for(var i in bundleDirs){
+    //
+    // Add the root dir to the bundle dir names - FIX ALL THE bundleDirs to be able to include
+    if (typeof (bundleDirs) === 'string') {
+        bundleDirs = [
+            sMaster.pathNameFix(bundleDirs, root)
+        ];
+    } else {   // aray of strings ??? .....
+        for (var i in bundleDirs) {
             var bundleName = bundleDirs[i];
-            if(typeof(bundleName) === 'string'){
+            if (typeof (bundleName) === 'string') {
                 bundleName = sMaster.pathNameFix(bundleName, root);
             }
             bundleDirs[i] = bundleName;
@@ -49,27 +69,33 @@ module.exports.attach = function (options) {
 };
 
 //  attach and init all the bundle dirs ()
-module.exports.init = function (done) {
+module.exports.init = function(done) {
 
     // register bundle master
-    di_cont.use( require("./bundleMaster"), {init: true, root: root , pluginsPath: pluginDir} );
+    di_cont.use(require("../bundleMaster"), {init: true, root: root, pluginsPath: pluginDir});
     // attach all the files with extention ".nb.js"
-    var attach = di_cont.__nbundles.attach(bundleDirs, [".nb.js"], globalOptions);
+    var attach = di_cont.___nb.attach(bundleDirs, [
+        ".nb.js"
+    ], globalOptions);
     // inits all the bundles
-    var init = di_cont.__nbundles.init();
+    var init = di_cont.___nb.init();
     // if needs to be called the function as all is done
-    if(typeof(done) === 'function'){ return done(); }
-    else{ return; }
+    if (typeof (done) === 'function') {
+        return done();
+    }
+    else {
+        return;
+    }
 };
 
-module.exports.getDI = function(){
+module.exports.getDI = function() {
     return di_cont;
 };
 
 module.exports.basicBundleBuilder = builder;
 module.exports.basic = builder;
 
-function builder(){
+function builder() {
     var basicBuilder = require('./basicBundleBuilder');
     return basicBuilder;
 }

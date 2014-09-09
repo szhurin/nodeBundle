@@ -16,17 +16,17 @@ function getFileExt(fname){
 *   fixes the relative dir name and adds it to the root dir name
 *   avare of all slashes
 *
-*   @param string bundleName - the name of the directory
+*   @param string dir - the name of the directory
 *   @param string rootDir - the name of the rootDir
 *
 *   @returns string the global dir name
 */
-function pathNameFix(bundleName, rootDir){
+function pathNameFix(dir, rootDir){
     rootDir = rootDir || '';
     if(rootDir[rootDir.length -1] !== '/') rootDir +='/';
-    if(bundleName[bundleName.length -1] !== '/') bundleName +='/';
-    if(bundleName[0] === '/') bundleName = bundleName.substr(1);
-    return rootDir + bundleName ;
+    if(dir[dir.length -1] !== '/') dir +='/';
+    if(dir[0] === '/') dir = dir.substr(1);
+    return rootDir + dir ;
 }
 
 /*

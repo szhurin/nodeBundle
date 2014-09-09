@@ -58,8 +58,10 @@ module.exports = {
     addExports: addExports,
     setNBSettings: setNBSettings,
     addNBSettings: setNBSettings,
+    
     setRoutes: setRoutes,
     addRoutes: addRoutes,
+    
     getBundle: function(){return basicBundle;}
 };
 
