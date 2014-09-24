@@ -78,7 +78,7 @@ function getPluginsSettings(services, id){
 
 
 
-function populateServiceReg(di_cont, options, service,  bundle_file_list){
+function populateServiceReg(di_cont, options, services,  bundle_file_list){
     bundle_file_list = bundle_file_list || bundleFileList;
 
 
@@ -97,68 +97,66 @@ function populateServiceReg(di_cont, options, service,  bundle_file_list){
             obj.name = ''+obj.name;
         }
 
-        var services = obj.__settings.__services;
-        service.reg.push(obj);
-        var index = service.reg.length -1;
+        var servicesList = obj.__settings.__services;
+        services.reg.push(obj);
+        var index = services.reg.length -1;
 
         // create list of all imported services
-        var imp = services.imports || [];
+        var imp = servicesList.imports || [];
         imp = _.transform(imp, function(res, n){ if(n !== '') res.push(n);});
-        service.deps.importList[index] = imp;
-        service.deps.imports = _.union(imp, service.deps.imports);
+        services.dependencies.importList[index] = imp;
+        services.dependencies.imports = _.union(imp, services.dependencies.imports);
 
         // create list of all exported services
-        var exp = services.exports || [];
+        var exp = servicesList.exports || [];
         exp = _.transform(exp, function(res, n){ if(n !== '') res.push(n);});
-        service.deps.exportList[index] = exp;
-        service.deps.exports = _.union(exp, service.deps.exports);
+        services.dependencies.exportList[index] = exp;
+        services.dependencies.exports = _.union(exp, services.dependencies.exports);
 
 
-        if(service.names[obj.name] !== undefined){
-            errorHandle.errorOnBundleOverride(obj.name, service, obj);
+        if(services.names[obj.name] !== undefined){
+            errorHandle.errorOnBundleOverride(obj.name, services, obj);
         }
-        service.names[obj.name] = index;
+        services.names[obj.name] = index;
 
         // create list of all
         for(var j in exp){
             if (!exp.hasOwnProperty(j) || exp[j] === '') continue;
             var service_name = exp[j];
 
-            if(service.exp_list[service_name] !== undefined){
-                service.rewrites.push({ service: service_name,
+            if(services.exp_list[service_name] !== undefined){
+                services.rewrites.push({ service: service_name,
                                         module: obj.name,
-                                        overwridenModule: service.reg[service.exp_list[service_name]]['name'],
-                                        origFile: service.reg[service.exp_list[service_name]].__settings.__bundle_file,
+                                        overwridenModule: services.reg[services.exp_list[service_name]]['name'],
+                                        origFile: services.reg[services.exp_list[service_name]].__settings.__bundle_file,
                                         newFile: obj.__settings['__bundle_file']
                                         });
                 if(
                     obj.__settings['__services'] === undefined ||
                     obj.__settings['__services']['__rewrite'] === undefined ||
                     obj.__settings['__services']['__rewrite'] !== true){
-                    errorHandle.errorOnRewrite(service.rewrites[service.rewrites.length -1]);
+                    errorHandle.errorOnRewrite(services.rewrites[services.rewrites.length -1]);
                 }
             }
 
-            service.exp_list[service_name] = index;
+            services.exp_list[service_name] = index;
         }
 
         for(var j in imp){
             if (!imp.hasOwnProperty(j) || imp[j] === '') continue;
             var service_name = imp[j];
-            if(service.imp_list[service_name] !== undefined){
-                service.imp_list[service_name] = _.union(exp, service.imp_list[service_name]);
+            if(services.imp_list[service_name] !== undefined){
+                services.imp_list[service_name] = _.union(exp, services.imp_list[service_name]);
             }else{
-                service.imp_list[service_name] = exp;
+                services.imp_list[service_name] = exp;
             }
         }
 
         di_cont.use(obj, options );
     }
 
-    return service;
+    return services;
 }
-
-
 
 
 //   ----------  EXPORTS  --------------

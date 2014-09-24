@@ -6,6 +6,7 @@ var serviceMaster = require('../serviceMaster');
 
 var basicBundle;
 
+
 function init(modName){
     var fName = getCallFileName();
     var basic = require('../__basicBundles/basic.nb.js');
@@ -40,6 +41,8 @@ function setNBSettings(sets){
     basicBundle.__settings.__nb = sets;
     return module.exports;
 }
+
+
 function addRoutes(routes){
     basicBundle.__settings.__nb.__routes = _.assign(basicBundle.__settings.__nb.__routes, routes);
     return module.exports;
@@ -49,9 +52,14 @@ function setRoutes(routes){
     return module.exports;
 }
 
+function set(key, val){
+    basicBundle[key] = val;
+    return module.exports;
+}
+
 module.exports = {
     init: init,
-    set: function(key, val){basicBundle[key] = val; return module.exports;},
+    set: set,
     setImports: setImports,
     addImports: addImports,
     setExports: setExports,

@@ -7,8 +7,8 @@ module.exports = {
 
     checkImportExport: function(service, bExitOnError){
 
-        var incs = service.deps.imports;
-        var exps = service.deps.exports;
+        var incs = service.dependencies.imports;
+        var exps = service.dependencies.exports;
 
         var diff = _.difference(incs, exps);
 

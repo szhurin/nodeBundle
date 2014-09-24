@@ -65,12 +65,12 @@ var getDiag = function(mat){
 
 var getIndexOfService = function(name, service){
 
-    var index = service.deps.exports.indexOf(name);
+    var index = service.dependencies.exports.indexOf(name);
     return index;
 };
 
 var calcMatrix = function(service){
-    var exps = service.deps.exports;
+    var exps = service.dependencies.exports;
     dim = exps.length;
 
     var mat = Array(dim);
@@ -141,7 +141,7 @@ module.exports.calculateCyclic = function(services){
         var index = _.indexOf(diag, 1);
         var tmp = getCycle(matArr, index, [], index );
         // console.log(tmp);
-        var exps = services.deps.exports;
+        var exps = services.dependencies.exports;
         var servs = [];
         for(var i in tmp){
             if (!tmp.hasOwnProperty(i)) continue;

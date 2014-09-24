@@ -24,7 +24,7 @@ module.exports.name = "__nodeBundle_main";
 
 // init the bundle dirs - just collect all fixed dirs gotten in options
 
-/*
+/**
  *   attaches the modules to di container
  *   
  *   @param object options - the name of the directory

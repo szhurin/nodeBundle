@@ -6,7 +6,7 @@ var serviceReg = {
     rewrites: [],
     reg : [],
     names: {},
-    deps : { importList: [],  imports:[], exportList: [],  exports:[] }
+    dependencies : { importList: [],  imports:[], exportList: [],  exports:[] }
 };
 
  var serviceMaster = require('../serviceMaster');
