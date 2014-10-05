@@ -3,7 +3,7 @@ console.log('____________________________________________');
 nb.attach(['bundles']);
 nb.attach(['bundles1']);
 
-var di = nb.DI;
+var di = nb.container;
 
 //console.log('-----------------------------');
 console.log((di.___nb.getPluginList()).names);

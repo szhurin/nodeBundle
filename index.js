@@ -7,7 +7,7 @@ var nb = require('./plugins/nodeBundle');
 *   @param array options - an array of options to pass to plugins
 *   @params string root - the dir for the root of the node start file
 */
-var attach = function(bundleDirs , options, root){
+function attach(bundleDirs , options, root){
 	// get root path of called file if not given as parameter 
     root = root || require('path').dirname(require.main.filename) +'/';
     
@@ -24,12 +24,30 @@ var attach = function(bundleDirs , options, root){
     nb.init();
 };
 
-var getDI = function(){return nb.getDI();};
+/**
+ *  Dependency Injection container proxy
+ *
+ * @returnes 
+ */
+function getDI(){return nb.getContainer();};
+
+var basicBundleBuilder = nb.basicBundleBuilder;
+
+function setBasicBundleBuilder(builder){
+    basicBundleBuilder = builder;
+}
+function getBasicBundleBuilder(builder){
+    return basicBundleBuilder;
+}
 
 // set up exports
 module.exports.attach = attach;
-module.exports.getDI = getDI;
-module.exports.DI = getDI();
+module.exports.DI = getDI;
+module.exports.getDI = getDI();
+module.exports.container = getDI();
+module.exports.getContainer = getDI;
 
-module.exports.basicBundleBuilder = nb.basicBundleBuilder;
+module.exports.getBasicBundleBuilder = getBasicBundleBuilder;
+module.exports.basicBundleBuilder = basicBundleBuilder;
+module.exports.setBasicBundleBuilder = setBasicBundleBuilder();
 module.exports.basic = nb.basic;

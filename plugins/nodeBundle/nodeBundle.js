@@ -20,7 +20,7 @@ var fixEndingSlash = function(path) {
     return path;
 };
 
-module.exports.name = "__nodeBundle_main";
+var name = "__nodeBundle_main";
 
 // init the bundle dirs - just collect all fixed dirs gotten in options
 
@@ -35,7 +35,7 @@ module.exports.name = "__nodeBundle_main";
  *       pluginDir  : the dir where plugins are
  *       }
  */
-module.exports.attach = function(options) {
+function attach(options) {
     // init
     globalOptions = options;
     bundleDirs = options.bundleDirs || [];
@@ -69,7 +69,7 @@ module.exports.attach = function(options) {
 };
 
 //  attach and init all the bundle dirs ()
-module.exports.init = function(done) {
+function init(done) {
 
     // register bundle master
     di_cont.use(require("../bundleMaster"), {init: true, root: root, pluginsPath: pluginDir});
@@ -88,17 +88,26 @@ module.exports.init = function(done) {
     }
 };
 
-module.exports.getDI = function() {
+function getContainer() {
     return di_cont;
 };
 
-module.exports.basicBundleBuilder = builder;
-module.exports.basic = builder;
 
 function builder() {
     var basicBuilder = require('./basicBundleBuilder');
     return basicBuilder;
 }
 
+
+module.exports = {
+    basicBundleBuilder: builder,
+
+    init: init,
+    attach: attach,
+    name: name,
+
+    getContainer: getContainer,
+    container: getContainer()
+}
 
 

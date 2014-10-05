@@ -1,6 +1,0 @@
-nodeBundle
-==============
-
-This is nodeBundle.
-
-
